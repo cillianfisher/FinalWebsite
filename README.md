@@ -1,5 +1,7 @@
 # Welcome to our [team project website!](https://julioveracruz.github.io/testwebsite/)
 
+By Noah, Patrick, Yuan, Cillian
+
 This is a website to showcase our final project for FIN 377 - Data Science for Finance course at Lehigh University.
 
 To see the complete analysis file(s) click [here](https://github.com/julioveracruz/testwebsite/blob/main/notebooks/example.ipynb).
