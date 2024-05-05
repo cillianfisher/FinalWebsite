@@ -2,8 +2,6 @@
 
 By Noah, Patrick, Yuan, Cillian
 
-By Noah, Patrick, Yuan, Cillian
-
 This is a website to showcase our final project for FIN 377 - Data Science for Finance course at Lehigh University.
 
 To see the complete analysis file(s) click [here](https://github.com/cillianfisher/finalProject/blob/main/SandBox.ipynb).
