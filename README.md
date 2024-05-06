@@ -1,25 +1,15 @@
 # Welcome to our team project website!
 
-By Noah, Patrick, Yuan, Cillian
-1233
+### Research Direction: Analyzing the Financial Health of Middle Market Firms
+### By Noah Levine, Patrick Williams, Yuan Wang, Cillian Fisher
 
 This is a website to showcase our final project for FIN 377 - Data Science for Finance course at Lehigh University.
 
-To see the complete analysis file(s) click [here](https://github.com/cillianfisher/finalProject/blob/main/SandBox.ipynb).
-
-Maybe you want a different website them for the project? Consider `minimal-mistakes`:
-1. [Go here](https://github.com/mmistakes/mm-github-pages-starter/generate).
-2. In the resulting repo, click Settings, then Pages, then make sure the source is the main branch.
-3. [The doc site is here](https://mmistakes.github.io/minimal-mistakes/docs/structure/) and will help you customize layouts and figure out how to use it.
-
 ## Table of contents
 1. [Introduction](#introduction)
-2. [Methodology](#meth)
-3. [Section 2](#section2)
-    1. [Subsection](#subsec2-1)
-    2. [Subsection](#subsec2-2)
-4. [Analysis Section](#section3)
-5. [Summary](#summary)
+2. [Codes](#meth)
+3. [Analysis Section](#section3)
+4. [Summary](#summary)
 
 ## Introduction  <a name="introduction"></a>
 
@@ -47,15 +37,6 @@ print(iris['species'].nunique(), '\n---')
 ```
 
 Notice that the output does NOT show! **You have to copy in figures and tables from the notebooks.**
-
-## Section <a name="section2"></a>
-Blah blah
-
-### Subsection 1 <a name="subsec2-1"></a>
-This is a subsection, formatted in heading 3 style
-
-### Subsection 2 <a name="subsec2-2"></a>
-This is a subsection, formatted in heading 3 style
 
 ## Analysis Section <a name="section3"></a>
 
@@ -92,4 +73,4 @@ Don is an assistant professor at Lehigh.
 
 ## More 
 
-To view the GitHub repo for this website, click [here](https://github.com/donbowen/teamproject).
+To view the GitHub repo for this website, click [here](https://github.com/cillianfisher/finalProject).
