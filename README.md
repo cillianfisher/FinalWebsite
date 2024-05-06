@@ -41,7 +41,7 @@ MiddleMarket_data['Avg_Price'] = (MiddleMarket_data['prch_c'] + MiddleMarket_dat
 MiddleMarket_data['Market_Cap'] = MiddleMarket_data['Avg_Price'] * MiddleMarket_data['csho']
 ```
 
-More filtering to find where EBITDA was positive and then selected relevant columsn for analysis.
+More filtering to find where EBITDA was positive and then selected relevant columns for analysis.
 We also re-ordered the columns for readibility:
 
 ```python
@@ -52,7 +52,7 @@ filtered_data.reindex()
 filtered_data = filtered_data[['Ticker', 'Company Name', 'Market_Cap','Fiscal Date', 'Fiscal Year','Employees','SP Index Code', 'EBITDA', 'Operating Income', 'Dividends', 'Long-Term Debt', 'Research and Development Expenses', 'Cost of Goods Sold', 'Operating Income Before Depreciation', 'Capital Expenditures', 'Total Assets', 'Revenue', 'Selling, General, and Administrative Expenses', 'Property, Plant, and Equipment Net', 'Common Shares Outstanding', 'Gross Property, Plant, and Equipment', 'Cash and Equivalents', 'Common Equity', 'Current Liabilities', '52-Week Low Price', '52-Week High Price','Avg_Price','Market_Cap','OpInc After Dep','Inventory','SP Index Code','Employees','Taxes','Interest Expense','Current Assets']]
 ```
 
-Then we did some Machine Learning using ExplainableBoostingRegressor
+Then we did some Machine Learning using ExplainableBoostingRegressor:
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -76,6 +76,37 @@ ebm.fit(X_train, y_train)
 # Get the global feature importances from the model
 ebm_global = ebm.explain_global()
 show(ebm_global)
+```
+
+Then we created code to choose the best features using RandomForestRegressor:
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Group the data by 'Division'
+for division, group in selected_df.groupby('Division'):
+    print(f"\nDivision: {division}")
+
+    # Prepare the features (X) and target (y)
+    X = group.drop(columns=['Ticker', 'Division', 'EV/EBITDA', 'P/E', 'EV/GP', 'EV_EBIT', 'FCF Yield', 'EV/EBITDA-Capex'])
+    y = group['EV/EBITDA']
+
+    # Check if there are enough samples to train the model
+    if len(y) < 2:
+        print(f"Not enough samples to perform feature selection for {division}")
+        continue
+
+    # Scale the features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Use RandomForestRegressor to get feature importances
+    rf = RandomForestRegressor(random_state=42)
+    rf.fit(X_scaled, y)
+    feature_importances = rf.feature_importances_
 ```
 
 
