@@ -16,7 +16,7 @@ This is a website to showcase our final project for FIN 377 - Data Science for F
 
 The main purpose of this project is to explore the effectiveness and reliability of various financial metrics and valuation multiples in assessing the financial health and performance of middle market companies in the context of mergers and acquisitions (M&A). Specifically, our research aims to identify which financial metrics demonstrate the strongest correlation with commonly used valuation multiples across different economic sectors in the middle market. This will provide clearer investment strategies and enhance financial assessment methodologies, thereby facilitating more informed decision-making in the M&A process.
 
-## Methodology <a name="meth"></a>
+## Codes <a name="meth"></a>
 
 Here is some code that we used to develop our analysis. 
 
@@ -51,6 +51,69 @@ filtered_data.columns = ['Ticker', 'EBITDA', 'Dividends', 'Operating Income', 'C
 filtered_data.reindex()
 filtered_data = filtered_data[['Ticker', 'Company Name', 'Market_Cap','Fiscal Date', 'Fiscal Year','Employees','SP Index Code', 'EBITDA', 'Operating Income', 'Dividends', 'Long-Term Debt', 'Research and Development Expenses', 'Cost of Goods Sold', 'Operating Income Before Depreciation', 'Capital Expenditures', 'Total Assets', 'Revenue', 'Selling, General, and Administrative Expenses', 'Property, Plant, and Equipment Net', 'Common Shares Outstanding', 'Gross Property, Plant, and Equipment', 'Cash and Equivalents', 'Common Equity', 'Current Liabilities', '52-Week Low Price', '52-Week High Price','Avg_Price','Market_Cap','OpInc After Dep','Inventory','SP Index Code','Employees','Taxes','Interest Expense','Current Assets']]
 ```
+
+Then we added new columns into the reordered dataframe:
+
+```python
+# EV/EBITDA
+filtered_data['Enterprise_Value'] = filtered_data['Market_Cap'] + filtered_data['Long-Term Debt'] - filtered_data['Cash and Equivalents']
+filtered_data['EV/EBITDA'] = filtered_data['Enterprise_Value'] / filtered_data['EBITDA']
+# P/E Ratio
+filtered_data['EPS'] = filtered_data['Operating Income Before Depreciation'] / filtered_data['Common Shares Outstanding']
+filtered_data['P/E'] = filtered_data['Avg_Price'] / filtered_data['EPS']
+# Debt-to-Equity Ratio
+filtered_data['Debt_to_Equity'] = filtered_data['Long-Term Debt'] / filtered_data['Common Equity']
+# Return on Equity (ROE)
+filtered_data['ROE'] = filtered_data['Operating Income Before Depreciation'] / filtered_data['Common Equity']
+# Current Ratio
+filtered_data['Current_Ratio'] = filtered_data['Total Assets'] / filtered_data['Current Liabilities']
+# Quick Ratio
+filtered_data['Quick_Ratio'] = (filtered_data['Total Assets'] - filtered_data['Inventory']) / filtered_data['Current Liabilities']
+# Interest Covered Ratio
+filtered_data['Interest_Coverage_Ratio'] = filtered_data['EBITDA'] / filtered_data['Interest Expense']
+# Gross Margin
+filtered_data['Gross_Margin'] = (filtered_data['Revenue'] - filtered_data['Cost of Goods Sold']) / filtered_data['Revenue']
+# Operating Margin
+filtered_data['Operating_Margin'] = filtered_data['Operating Income Before Depreciation'] / filtered_data['Revenue']
+# Calculate Gross Profit
+filtered_data['Gross Profit'] = filtered_data['Revenue'] - filtered_data['Cost of Goods Sold']
+# Calculate Gross Profit Margin
+filtered_data['Gross Profit Margin'] = (filtered_data['Gross Profit'] / filtered_data['Revenue']) 
+#EV/GP 
+filtered_data['EV/GP'] = filtered_data['Enterprise_Value'] / filtered_data['Gross Profit']
+# Calculate EBITDA - Capex
+filtered_data['EBITDA - Capex'] = filtered_data['EBITDA'] - filtered_data['Capital Expenditures']
+# Calculate EBITDA - Capex margin
+filtered_data['EBITDA - Capex Margin'] = (filtered_data['EBITDA - Capex'] / filtered_data['EBITDA']) 
+filtered_data['EV/EBITDA-Capex'] = filtered_data['Enterprise_Value'] / filtered_data['EBITDA - Capex']
+filtered_data['Free Cash Flow'] = (filtered_data['EBITDA']
+                                   - filtered_data['Taxes']
+                                   - filtered_data['Interest Expense']
+                                   + (filtered_data['Current Assets'] - filtered_data['Current Liabilities'])
+                                   - filtered_data['Capital Expenditures'])
+filtered_data['FCF_Positive'] = (filtered_data['Free Cash Flow'] > 0).astype(int)
+filtered_data['FCF Yield'] = filtered_data['Free Cash Flow'] / filtered_data['Market_Cap']
+filtered_data['Invested_Capital'] = filtered_data['Long-Term Debt'] + filtered_data['Common Equity']
+filtered_data['EBIT'] = filtered_data['Operating Income'] + filtered_data['Interest Expense'] + filtered_data['Taxes']
+filtered_data['EV_EBIT'] = filtered_data['Enterprise_Value'] / filtered_data['EBIT']
+filtered_data['ROIC'] = filtered_data['EBIT'] / filtered_data['Invested_Capital']
+filtered_data['EBIT Margin (%)'] = (filtered_data['EBIT'] / filtered_data['Revenue']) 
+filtered_data['EBIT_Positive'] = (filtered_data['EBIT'] > 0).astype(int)
+filtered_data
+
+filtered_data['Revenue per Employee'] = filtered_data['Revenue'] / filtered_data['Employees']
+
+filtered_data['Total Debt Service'] = filtered_data['Long-Term Debt'] + filtered_data['Interest Expense']
+filtered_data['Debt_Coverage_Ratio'] = filtered_data['Operating Income Before Depreciation'] / filtered_data['Total Debt Service']
+
+filtered_data['Dividend (y/n)'] = (filtered_data['Dividends'] > 0).astype(int)
+
+filtered_data['Price_Range_Ratio'] = (filtered_data['52-Week High Price'] - filtered_data['52-Week Low Price']) / filtered_data['52-Week Low Price']
+
+filtered_data.describe()
+```
+
+Following that, we did all kinds of sorting and grouping work to make the dataframe ready to analysis, for more code please click the link [here](https://github.com/cillianfisher/finalProject/blob/main/SandBox_analysis.ipynb)
 
 Then we did some Machine Learning using ExplainableBoostingRegressor:
 
