@@ -1,7 +1,7 @@
 # Welcome to our team project website!
-
 ### Research Direction: Analyzing the Financial Health of Middle Market Firms
-### By Noah Levine, Patrick Williams, Yuan Wang, Cillian Fisher
+
+By Noah Levine, Patrick Williams, Yuan Wang, Cillian Fisher
 
 This is a website to showcase our final project for FIN 377 - Data Science for Finance course at Lehigh University.
 
