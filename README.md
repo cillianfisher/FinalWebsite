@@ -18,7 +18,19 @@ The main purpose of this project is to explore the effectiveness and reliability
 
 ## Methodology <a name="meth"></a>
 
-Here is some code that we used to develop our analysis. Blah Blah. [More details are provided in the Appendix](page2).
+Here is some code that we used to develop our analysis. 
+
+We began by importing neccessary packages and defining our dataframe: 
+
+```python
+import numpy as np
+import pandas as pd
+df = pd.read_stata('ccm.dta')
+#df.head()  
+pd.set_option('display.max_columns', None)
+#print(df.columns)
+'''
+
  
 Note that for the purposes of the website, you have to copy this code into the markdown file and  
 put the code inside trip backticks with the keyword `python`.
