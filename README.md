@@ -29,7 +29,7 @@ df = pd.read_stata('ccm.dta')
 #df.head()  
 pd.set_option('display.max_columns', None)
 #print(df.columns)
-'''
+```
 
  
 Note that for the purposes of the website, you have to copy this code into the markdown file and  
