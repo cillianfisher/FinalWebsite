@@ -31,25 +31,53 @@ pd.set_option('display.max_columns', None)
 #print(df.columns)
 ```
 
- 
-Note that for the purposes of the website, you have to copy this code into the markdown file and  
-put the code inside trip backticks with the keyword `python`.
+We then filtered our Market Caps and took out companies with no gross profit, calculating Market Capitlization:
 
 ```python
-import seaborn as sns 
-iris = sns.load_dataset('iris') 
-
-print(iris.head(),  '\n---')
-print(iris.tail(),  '\n---')
-print(iris.columns, '\n---')
-print("The shape is: ",iris.shape, '\n---')
-print("Info:",iris.info(), '\n---') # memory usage, name, dtype, and # of non-null obs (--> # of missing obs) per variable
-print(iris.describe(), '\n---') # summary stats, and you can customize the list!
-print(iris['species'].value_counts()[:10], '\n---')
-print(iris['species'].nunique(), '\n---')
+# Filter Market Caps and companies that dont have gross profit
+MiddleMarket_data = df[(df['mkvalt'] >= 0) & (df['mkvalt'] <= 12000)]
+# Calculate market capitalization
+MiddleMarket_data['Avg_Price'] = (MiddleMarket_data['prch_c'] + MiddleMarket_data['prcl_c']) / 2
+MiddleMarket_data['Market_Cap'] = MiddleMarket_data['Avg_Price'] * MiddleMarket_data['csho']
 ```
 
-Notice that the output does NOT show! **You have to copy in figures and tables from the notebooks.**
+More filtering to find where EBITDA was positive and then selected relevant columsn for analysis.
+We also re-ordered the columns for readibility:
+
+```python
+filtered_data = MiddleMarket_data.loc[MiddleMarket_data['ebitda'] > 0, ['tic','ebitda','dvc','ob','conm','fdate','lt','fyr','xrd','cogs','oibdp','capx','at','revt', 'xsga','ppent','csho','ppegt', 'che','ceq','lct','prcl_c','prch_c','Avg_Price','Market_Cap','oiadp','invt','sich','emp','txt','xint','act']]
+#filtered_data
+filtered_data.columns = ['Ticker', 'EBITDA', 'Dividends', 'Operating Income', 'Company Name', 'Fiscal Date', 'Long-Term Debt', 'Fiscal Year', 'Research and Development Expenses', 'Cost of Goods Sold', 'Operating Income Before Depreciation', 'Capital Expenditures', 'Total Assets', 'Revenue', 'Selling, General, and Administrative Expenses', 'Property, Plant, and Equipment Net', 'Common Shares Outstanding', 'Gross Property, Plant, and Equipment', 'Cash and Equivalents', 'Common Equity', 'Current Liabilities', '52-Week Low Price', '52-Week High Price','Avg_Price','Market_Cap','OpInc After Dep','Inventory','SP Index Code','Employees','Taxes','Interest Expense','Current Assets']
+filtered_data.reindex()
+filtered_data = filtered_data[['Ticker', 'Company Name', 'Market_Cap','Fiscal Date', 'Fiscal Year','Employees','SP Index Code', 'EBITDA', 'Operating Income', 'Dividends', 'Long-Term Debt', 'Research and Development Expenses', 'Cost of Goods Sold', 'Operating Income Before Depreciation', 'Capital Expenditures', 'Total Assets', 'Revenue', 'Selling, General, and Administrative Expenses', 'Property, Plant, and Equipment Net', 'Common Shares Outstanding', 'Gross Property, Plant, and Equipment', 'Cash and Equivalents', 'Common Equity', 'Current Liabilities', '52-Week Low Price', '52-Week High Price','Avg_Price','Market_Cap','OpInc After Dep','Inventory','SP Index Code','Employees','Taxes','Interest Expense','Current Assets']]
+```
+
+Then we did some Machine Learning using ExplainableBoostingRegressor
+
+```python
+from sklearn.model_selection import train_test_split
+from interpret.glassbox import ExplainableBoostingRegressor 
+from interpret import show
+
+X = selected_df.drop(columns=['Ticker', 'Division'])
+y = selected_df['EV/EBITDA']
+
+# Split the dataset into training and testing sets
+seed = 42
+np.random.seed(seed)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=seed)
+
+# Initialize the ExplainableBoostingRegressor
+ebm = ExplainableBoostingRegressor(random_state=seed)
+
+# Fit the model
+ebm.fit(X_train, y_train)
+
+# Get the global feature importances from the model
+ebm_global = ebm.explain_global()
+show(ebm_global)
+```
+
 
 ## Analysis Section <a name="section3"></a>
 
