@@ -1,4 +1,5 @@
-# Analyzing the Financial Health of Middle Market Firms
+# How to Beat The Market!
+
 ### Research Direction: Analyzing the Financial Health of Middle Market Firms
 
 By Noah Levine, Patrick Williams, Yuan Wang, Cillian Fisher
