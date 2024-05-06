@@ -1,4 +1,4 @@
-# Welcome to our team project website!
+Analyzing the Financial Health of Middle Market Firms
 ### Research Direction: Analyzing the Financial Health of Middle Market Firms
 
 By Noah Levine, Patrick Williams, Yuan Wang, Cillian Fisher
@@ -13,7 +13,7 @@ This is a website to showcase our final project for FIN 377 - Data Science for F
 
 ## Introduction  <a name="introduction"></a>
 
-(The "Introduction" text above is formatted in heading 2 style.) The main goal of this project is to explore *(insert project idea here)*.  
+The main purpose of this project is to explore the effectiveness and reliability of various financial metrics and valuation multiples in assessing the financial health and performance of middle market companies in the context of mergers and acquisitions (M&A). Specifically, our research aims to identify which financial metrics demonstrate the strongest correlation with commonly used valuation multiples across different economic sectors in the middle market. This will provide clearer investment strategies and enhance financial assessment methodologies, thereby facilitating more informed decision-making in the M&A process.
 
 ## Methodology <a name="meth"></a>
 
