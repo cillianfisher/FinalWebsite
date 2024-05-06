@@ -1,4 +1,4 @@
-Analyzing the Financial Health of Middle Market Firms
+#Analyzing the Financial Health of Middle Market Firms
 ### Research Direction: Analyzing the Financial Health of Middle Market Firms
 
 By Noah Levine, Patrick Williams, Yuan Wang, Cillian Fisher
