@@ -288,6 +288,69 @@ for division, group in selected_df.groupby('Division'):
     feature_importances = rf.feature_importances_
 ```
 
+We did the samething repetitively, but this time we defined y as EV/SALES:
+
+```python
+# Loop through each unique Division and compute feature importance
+for division, group in selected_df.groupby('Division'):
+    print(f"\nDivision: {division}")
+    
+    # Prepare features (X) and target (y)
+    X = group.drop(columns=['Ticker', 'Division','EV/EBITDA', 'P/E', 'EV/GP','EV_EBIT','EV/Sales', 'FCF Yield','EV/EBITDA-Capex'])
+    y = group['EV/Sales']
+
+    # Check if there are enough samples to perform a split and modeling
+    if len(y) < 10:
+        print(f"Not enough samples to perform feature selection for {division}")
+        continue
+    
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
+
+    # Initialize the ExplainableBoostingRegressor
+    ebm = ExplainableBoostingRegressor(random_state=42)
+
+    # Fit the model
+    ebm.fit(X_train, y_train)
+
+    # Get the global feature importances from the model
+    ebm_global = ebm.explain_global()
+    show(ebm_global)
+```
+
+```python
+# Group the data by 'Division'
+for division, group in selected_df.groupby('Division'):
+    print(f"\nDivision: {division}")
+
+    # Prepare the features (X) and target (y)
+    X = group.drop(columns=['Ticker', 'Division', 'EV/EBITDA', 'P/E', 'EV/GP', 'EV_EBIT','EV/Sales', 'FCF Yield', 'EV/EBITDA-Capex'])
+    y = group['EV/Sales']
+
+    # Check if there are enough samples to train the model
+    if len(y) < 10:
+        print(f"Not enough samples to perform feature selection for {division}")
+        continue
+
+    # Scale the features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Use RandomForestRegressor to get feature importances
+    rf = RandomForestRegressor(random_state=42)
+    rf.fit(X_scaled, y)
+    feature_importances = rf.feature_importances_
+
+    # Plot feature importances
+    features = pd.DataFrame({'Feature': X.columns, 'Importance': feature_importances})
+    features = features.sort_values(by='Importance', ascending=False)
+    
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='Importance', y='Feature', data=features.head(20))
+    plt.title(f'Top 20 Important Features according to Random Forest for {division}')
+    plt.show()
+```
+
 
 ## Analysis Section <a name="section3"></a>
 
