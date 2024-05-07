@@ -231,7 +231,7 @@ for division, group in grouped_data:
             print(model.summary())
 ```
 
-Then we did some Machine Learning using ExplainableBoostingRegressor:
+Then we did some Machine Learning using ExplainableBoostingRegressor to identifying what financial metrics drive/influence our multiples of interest([features importance](#FI)):
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -354,27 +354,35 @@ If you want to go through our codes coherently, please click the link [here](pro
 
 ## Analysis Section <a name="section3"></a>
 
-Here are some graphs that we created in our analysis. We saved them to the `pics/` subfolder and include them via the usual markdown syntax for pictures.
+We will go depth on what we found in the code and the logic behind our code in this section. 
 
 ![](pics/plot1.png)
 <br><br>
-Some analysis here
+This plot shows a lack of clear relation between Revenue per Employee and the P/E ratio, suggesting that higher productivity per employee does not necessarily translate into higher market valuation based on earnings.
 <br><br>
 ![](pics/plot2.png)
 <br><br>
-More analysis here.
+Same as the previous plot, regardless of the outliers, the cluster of dots does not indicate a strong direct correlation, suggesting that short-term profit changes may not have a significant impact on this valuation metric.
 <br><br>
 ![](pics/plot3.png)
 <br><br>
+The data shows a negative correlation where higher ROIC corresponds to lower EV/EBIT ratios.
 <br><br>
 ![](pics/plot4.png)
 <br><br>
+No clear trend.
 <br><br>
 ![](pics/plot5.png)
 <br><br>
+Again, there's no clear trend.
+<br><br>
+
+<br><br>
+### Feature Importance analysis <a name="FI"></a>
 <br><br>
 ![](pics/ExplainableBoostingRegressor.png)
 <br><br>
+Here are the results of the Feature selection code above
 <br><br>
 ![](pics/RandomForestRegressor.png)
 <br><br>
