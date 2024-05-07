@@ -391,11 +391,10 @@ R-squared for EV/Sales is 0.400. This reflects that 40% of the variability in EV
 ### Feature Importance analysis <a name="FI"></a>
 ![](pics/ExplainableBoostingRegressor.png)
 <br><br>
-Here are the results of the Feature selection code above
-<br><br>
+
 ![](pics/RandomForestRegressor.png)
 <br><br>
-More analysis.
+Here are the results showing the importance of all features using Explainable Boosting Regressor as a model. Since there'are two different multiples, we selected each mutiple at a single time to train the model separately. Take the images above as an example, those are the results for three different divisions when we were taking EV/EBITDA as our multiple. The bar in the plot reflects the importance of different features.
 
 ## Summary <a name="summary"></a>
 
