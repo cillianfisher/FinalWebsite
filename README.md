@@ -382,11 +382,9 @@ More analysis.
 
 ## Summary <a name="summary"></a>
 
-Our goal is to complete an analysis in relation to middle market mergers and acquisitions. The project is aimed at quickening the assessment process by automating the calculation of these economic indicators. By dividing data into divisions, the code calculates and shows correlations between various metrics (such as ROE, Debt Coverage Ratio) which are used to evaluate a company’s performance as well as growth potential on one hand with key financial multiples like EV/EBITDA or P/E ratio on another hand. Each division’s information is studied separately so as to identify traits that indicate companies with high chances of being acquired. This analysis seeks to efficiently determine what measures or ratios best show strong growth thus helping decision makers know where they should invest more when dealing with dynamically changing merger environments.
+Our project aims to streamline the assessment process in middle market mergers and acquisitions by automating the analysis of key financial multiples and metrics. Utilizing the CRSP database, we have developed a method to calculate and visualize the correlations between various indicators such as ROE, Debt Coverage Ratio, and financial multiples like EV/EBITDA or P/E ratio. By analyzing data segmented by divisions, our approach identifies specific traits that signify a company’s potential for strong growth and acquisition viability. This targeted analysis allows decision-makers to quickly and accurately pinpoint where to focus investment efforts in the fast-paced M&A landscape.
 
-Building upon our initial proposal, our project uses the CRSP database to automate and refine how financial health is measured within different middle market firms. Using our methods to analyze various financial metrics/valuation multiples, we aimed to find which indicators most accurately predict a company's potential for being acquired through an M&A. This process not only speeds up the assessment process, but increases its accuracy, crucial for making quick and efficient M&A decisions. 
-
-Our research and insights could potentially lead to tools that could help simplify the evaluation process, making this valuable for both investors and analysts.
+The insights gained from this project could lead to the development of tools that simplify the evaluation process, proving invaluable to investors and analysts alike by enhancing the efficiency and accuracy of their investment decisions in the dynamic M&A environment.
 
 
 ## About the team
