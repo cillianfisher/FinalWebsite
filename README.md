@@ -391,8 +391,3 @@ Yuan is a senior studying Finance.
 <img src="pics/cillian.jpg" alt="don" width="300"/>
 <br>
 Cillian is a senior also studying Finance.
-
-
-## More 
-
-To view the GitHub repo for this website, click [here](https://github.com/cillianfisher/finalProject).
