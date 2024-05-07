@@ -378,7 +378,7 @@ Again, there's no clear trend.
 <br><br>
 
 <br><br>
-![](pics/MLR1.png
+![](pics/MLR1.png)
 <br><br>
 We first defined the multiples, EV/EBITDA and EV/Sales are the dependent variables in the regression, the financial ratios for which we want to understand the influences exerted by various metrics. And by looking at Adj. R-squared, we can gain insights into which factors are most influential and how these relationships vary by division. Take manufacturing division as example, the R-squared for EV/EBITDA is -0.001, which indicates underfitting.
 <br><br>
