@@ -366,6 +366,18 @@ More analysis here.
 <br><br>
 ![](pics/plot3.png)
 <br><br>
+<br><br>
+![](pics/plot4.png)
+<br><br>
+<br><br>
+![](pics/plot5.png)
+<br><br>
+<br><br>
+![](pics/ExplainableBoostingRegressor.png)
+<br><br>
+<br><br>
+![](pics/RandomForestRegressor.png)
+<br><br>
 More analysis.
 
 ## Summary <a name="summary"></a>
