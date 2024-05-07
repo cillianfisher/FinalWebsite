@@ -378,6 +378,14 @@ Again, there's no clear trend.
 <br><br>
 
 <br><br>
+![](pics/MLR1.png)
+
+<br><br>
+![](pics/MLR2.png)
+
+<br><br>
+
+<br><br>
 ### Feature Importance analysis <a name="FI"></a>
 ![](pics/ExplainableBoostingRegressor.png)
 <br><br>
