@@ -379,7 +379,6 @@ Again, there's no clear trend.
 
 <br><br>
 ### Feature Importance analysis <a name="FI"></a>
-<br><br>
 ![](pics/ExplainableBoostingRegressor.png)
 <br><br>
 Here are the results of the Feature selection code above
