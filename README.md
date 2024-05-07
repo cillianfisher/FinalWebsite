@@ -384,6 +384,9 @@ More analysis.
 
 Our goal is to complete an analysis in relation to middle market mergers and acquisitions. The project is aimed at quickening the assessment process by automating the calculation of these economic indicators. By dividing data into divisions, the code calculates and shows correlations between various metrics (such as ROE, Debt Coverage Ratio) which are used to evaluate a company’s performance as well as growth potential on one hand with key financial multiples like EV/EBITDA or P/E ratio on another hand. Each division’s information is studied separately so as to identify traits that indicate companies with high chances of being acquired. This analysis seeks to efficiently determine what measures or ratios best show strong growth thus helping decision makers know where they should invest more when dealing with dynamically changing merger environments.
 
+Building upon our initial proposal, our project uses the CRSP database to automate and refine how financial health is measured within different middle market firms. Using our methods to analyze various financial metrics/valuation multiples, we aimed to find which indicators most accurately predict a company's potential for being acquired through an M&A. This process not only speeds up the assessment process, but increases its accuracy, crucial for making quick and efficient M&A decisions. 
+
+Our research and insights could potentially lead to tools that could help simplify the evaluation process, making this valuable for both investors and analysts.
 
 
 ## About the team
