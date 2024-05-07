@@ -113,7 +113,7 @@ filtered_data['Price_Range_Ratio'] = (filtered_data['52-Week High Price'] - filt
 filtered_data.describe()
 ```
 
-Following that, we did all kinds of sorting and grouping work to make the dataframe ready to analysis, for more code please click the link [here](https://github.com/cillianfisher/finalProject/blob/main/SandBox_analysis.ipynb)
+Following that, we did all kinds of sorting and grouping work to make the dataframe ready for the analysis. For more code please click the link [here](project.pdf)
 
 Then we did some Machine Learning using ExplainableBoostingRegressor:
 
