@@ -197,13 +197,21 @@ Blah blah
 
 ## About the team
 
-<img src="pics/julio.jpg" alt="julio" width="300"/>
+<img src="pics/noah.jpg" alt="julio" width="300"/>
 <br>
-Julio is a senior at Lehigh studying finance.
+Noah is a post grad student, Mastering in Financial Engineering
 <br><br><br>
-<img src="pics/don2.jpg" alt="don" width="300"/>
+<img src="pics/pat.jpg" alt="don" width="300"/>
 <br>
-Don is an assistant professor at Lehigh.
+Pat is a post grad student, Mastering in Business Analytics
+<br><br><br>
+<img src="pics/yuan.jpg" alt="don" width="300"/>
+<br>
+Yuan is a senior studying Finance.
+<br><br><br>
+<img src="pics/cillian.jpg" alt="don" width="300"/>
+<br>
+Cillian is a senior studying Finance.
 
 
 ## More 
