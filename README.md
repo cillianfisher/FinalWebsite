@@ -113,7 +113,123 @@ filtered_data['Price_Range_Ratio'] = (filtered_data['52-Week High Price'] - filt
 filtered_data.describe()
 ```
 
-Following that, we did all kinds of sorting and grouping work to make the dataframe ready for the analysis. For more code please click the link [here](projectpdf.pdf)
+Then we came to the crucial step. Initially, we created two variables: multiples and metrics. After grouping by divisions and drop all the non numerical data, we calculated correlation matrices between the 'multiples' and 'metrics' for each divisions:
+
+```python
+# Define the multiples and metrics
+multiples = ['EV/EBITDA', 'EV/Sales', 'P/E', 'EV/GP','EV_EBIT','FCF Yield','EV/EBITDA-Capex']
+metrics = ['Debt_Coverage_Ratio', 'ROE', 'EBIT Margin (%)',
+           'YOY_Gross_Profit_Change','ROIC','FCF_Positive',
+           'Gross_Margin','Quick_Ratio','Current_Ratio','Debt_to_Equity',
+           'Revenue per Employee','FCF_Positive','YOY_Revenue_Change','YOY_EBIT_Change']
+
+# Drop the specified non-numeric columns
+columns_to_drop = ['Ticker', 'Division']
+
+# Iterate over each unique Division in the dataset
+grouped_data = selected_df.groupby('Division')
+for division, group in grouped_data:
+    # Drop the non-numeric columns
+    group = group.drop(columns=columns_to_drop, errors='ignore')
+    
+    # Keep only the columns that are multiples or metrics
+    subset = group[multiples + metrics].select_dtypes(include='number')
+    
+    # Calculate the correlation matrix
+    corr = subset.corr()
+    
+    # Plot the correlation matrix using seaborn heatmap
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(corr, cmap='coolwarm', annot=True)
+    plt.title(f'Correlation Matrix for Division: {division}')
+    plt.show()
+```
+Then, print out top 5 correlations for better visualizations:
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+
+# Define the multiples and metrics
+multiples = ['EV/EBITDA','EV/Sales']  #multiples = ['EV/EBITDA', 'P/E', 'EV/GP','EV_EBIT','FCF Yield','EV/EBITDA-Capex']
+metrics = ['Debt_Coverage_Ratio', 'ROE', 'EBIT Margin (%)',
+           'YOY_Gross_Profit_Change','ROIC','FCF_Positive',
+           'Gross_Margin','Quick_Ratio','Current_Ratio','Debt_to_Equity',
+           'Revenue per Employee','FCF_Positive','YOY_Revenue_Change','YOY_EBIT_Change']
+
+# Group data by sector
+grouped_data = selected_df.groupby('Division')
+
+# Calculate correlation between multiples and metrics for each sector
+correlation_results = {}
+for sector, group in grouped_data:
+    correlation_results[sector] = {}
+    for multiple in multiples:
+        for metric in metrics:
+            correlation = group[multiple].corr(group[metric])
+            correlation_results[sector][(multiple, metric)] = correlation
+
+# Sort correlation results and select top 5 correlations
+top_correlations = {}
+for sector, result in correlation_results.items():
+    top_correlations[sector] = sorted(result.items(), key=lambda x: abs(x[1]), reverse=True)[:5]
+
+# Plot scatter plots for top 5 correlations
+for sector, correlations in top_correlations.items():
+    print(f"--- {sector} ---")
+    for (multiple, metric), correlation in correlations:
+        plt.figure(figsize=(8, 6))
+        sns.scatterplot(data=selected_df, x=metric, y=multiple, hue='Division', palette='viridis')
+        plt.title(f'Scatter Plot of {metric} vs {multiple} ({sector})')
+        plt.xlabel(metric)
+        plt.ylabel(multiple)
+        plt.legend()
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+```
+
+Follow-up, we did multiple linear regression for each multiple as a dependent variable, using metrics as independent variables, grouped by division. It outputs a detailed summary for each regression, Gaining our understanding on impact of various metrics on the multiples:
+
+```python
+import statsmodels.api as sm
+
+# Assuming 'selected_df' is the DataFrame containing the data
+
+# Define the multiples (dependent variables) and metrics (independent variables)
+multiples = ['EV/EBITDA','EV/Sales']  #multiples = ['EV/EBITDA', 'P/E', 'EV/GP','EV_EBIT','FCF Yield','EV/EBITDA-Capex']
+metrics = ['Debt_Coverage_Ratio', 'ROE', 'EBIT Margin (%)',
+           'YOY_Gross_Profit_Change','ROIC','FCF_Positive',
+           'Gross_Margin','Quick_Ratio','Current_Ratio','Debt_to_Equity',
+           'Revenue per Employee','FCF_Positive','YOY_Revenue_Change','YOY_EBIT_Change']
+
+# Group data by Division
+grouped_data = selected_df.groupby('Division')
+
+# Perform MLR for each multiple by each industry
+for division, group in grouped_data:
+    print(f'\nDivision: {division}')
+    
+    # Drop non-numeric columns and keep only columns with multiples and metrics
+    group = group[multiples + metrics].select_dtypes(include='number')
+    
+    for multiple in multiples:
+        # Prepare the dependent (y) and independent (X) variables
+        if multiple in group.columns:
+            y = group[multiple].dropna()  # Drop missing values
+            X = group.loc[y.index, metrics].dropna()
+            
+            # Add a constant to the model (intercept term)
+            X = sm.add_constant(X)
+            
+            # Fit the model
+            model = sm.OLS(y, X).fit()
+            
+            # Print the summary of the model
+            print(f'\nMultiple: {multiple}')
+            print(model.summary())
+```
 
 Then we did some Machine Learning using ExplainableBoostingRegressor:
 
