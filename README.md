@@ -113,7 +113,7 @@ filtered_data['Price_Range_Ratio'] = (filtered_data['52-Week High Price'] - filt
 filtered_data.describe()
 ```
 
-Following that, we did all kinds of sorting and grouping work to make the dataframe ready for the analysis. For more code please click the link [here](project.pdf)
+Following that, we did all kinds of sorting and grouping work to make the dataframe ready for the analysis. For more code please click the link [here](projectpdf.pdf)
 
 Then we did some Machine Learning using ExplainableBoostingRegressor:
 
