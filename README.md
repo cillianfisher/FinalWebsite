@@ -350,7 +350,7 @@ for division, group in selected_df.groupby('Division'):
     plt.title(f'Top 20 Important Features according to Random Forest for {division}')
     plt.show()
 ```
-
+If you want to go through our codes coherently, please click the link [here](projectpdf.pdf).
 
 ## Analysis Section <a name="section3"></a>
 
